@@ -18,6 +18,7 @@ import RNRestart from 'react-native-restart';
 import RNFetchBlob from 'rn-fetch-blob';
 import { primaryColor } from '../constants/color';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import Sound from 'react-native-sound';  
 import successsound from '../assets/mixkit.wav'
 const Punch = ({ navigation }) => {
@@ -32,8 +33,27 @@ const Punch = ({ navigation }) => {
   const mapViewRef = React.useRef(null);
   const device = useCameraDevice('front');
   const {hasPermission} = useCameraPermission();
+  const [In,setIn]=useState('')
+  const [out,setOut]=useState('')
 
-
+  useEffect(() => {
+    const fetchPunchStatus = async () => {
+      try {
+       
+        const punchIn = JSON.parse(await AsyncStorage.getItem("punchIn"));
+        setIn(punchIn)
+        const punchOut=JSON.parse(await AsyncStorage.getItem("punchOut"));
+        setOut(punchOut)
+        console.log('punchin',punchIn) 
+        console.log('punchout',punchOut)// Assuming the punchIn is stored in AsyncStorage
+      } catch (error) {
+        console.error('Failed to fetch punch punchIn', error);
+      }
+    };
+    fetchPunchStatus(); // Initial fetch
+     
+   
+  }, []);
   Sound.setCategory('Playback'); // Ensures the sound plays even in silent mode
 
   const successSound = new Sound(successsound, Sound.MAIN_BUNDLE, (error) => {
@@ -414,36 +434,46 @@ const Punch = ({ navigation }) => {
        </View>
        <View>
         <Text style={styles.text}>
-          Longitude: {loadingLocation ? <ActivityIndicator size="small" color="#0000ff" /> : longitude}
+          Longitude  :  {loadingLocation ? <ActivityIndicator size="small" color="#0000ff" />  : longitude}
         </Text>
         <Text style={styles.text}>
-          Latitude: {loadingLocation ? <ActivityIndicator size="small" color="#0000ff" /> : latitude}
+          Latitude     :  {loadingLocation ? <ActivityIndicator size="small" color="#0000ff" />   : latitude}
         </Text>
-        <Text style={styles.text}>Mobile No: {EmployeeId}</Text>
+        <Text style={styles.text}>Mobile No  :  {EmployeeId}</Text>
         </View>
       </View>
       <View style={styles.btnView}>
       <TouchableOpacity style={[{justifyContent:'center',alignItems:'center',marginRight:10,backgroundColor:primaryColor,borderWidth:1,
-        borderColor:primaryColor,borderRadius:10,padding:5,elevation:4,width:100,height:50
+        borderColor:primaryColor,borderRadius:10,padding:5,elevation:4,width:120,height:50
       }]} onPress={() => setShowCamera(true)}>
          <Icon style={{elevation:4}} name='camera'size={22}color='white'/>
-         <Text style={[styles.txt,{color:'white',fontSize:13}]}>Take Selfie</Text>
+         <Text style={[styles.txt,{color:'white',fontSize:13,marginTop:0}]}>Take Selfie</Text>
        </TouchableOpacity>
         <View style={{flexDirection:'column',justifyContent:'space-evenly',gap:10}}>
+{ In ? (
+  <TouchableOpacity style={[styles.btn,{backgroundColor:'#fd5c63'}]} onPress={postPunchOutData} disabled={punchloading}>
+          {punchloading ? (
+            <ActivityIndicator size="small" color="#ffffff" />
+          ) : (
+            <View style={{alignItems:'center',justifyContent:'center'}}>
+            <Icon2  name='map-marker-account' size={28} color='white'/>
+            <Text style={styles.txt}>Punch Out</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+):(
+
         <TouchableOpacity style={styles.btn} onPress={postPunchData} disabled={punchloading}>
           {punchloading ? (
             <ActivityIndicator size="small" color="#ffffff" />
           ) : (
+            <View style={{alignItems:'center',justifyContent:'center'}}>
+            <Icon2  name='map-marker-account' size={28} color='white'/>
             <Text style={styles.txt}>Punch In</Text>
+            </View>
           )}
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn,{backgroundColor:'#fd5c63'}]} onPress={postPunchOutData} disabled={punchloading}>
-          {punchloading ? (
-            <ActivityIndicator size="small" color="#ffffff" />
-          ) : (
-            <Text style={styles.txt}>Punch Out</Text>
-          )}
-        </TouchableOpacity>
+        </TouchableOpacity>)}
+        
         </View>
       </View>
       {showCamera && (

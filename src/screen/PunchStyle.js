@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
       width:'100%'
     },
     mapcontainer: {
-      height: '63%',
+      height: '68%',
       width: '100%',
       justifyContent: 'flex-end',
       alignItems: 'center',
@@ -74,8 +74,8 @@ export const styles = StyleSheet.create({
     
     },
     btn: {
-      height: 45,
-      width: 100,
+      height: 50,
+      width: 120,
       backgroundColor: '#90EE90',
       borderRadius: 10,
       alignItems: 'center',
@@ -93,8 +93,9 @@ export const styles = StyleSheet.create({
     txt: {
       color: 'white',
       textAlign: 'center',
-      fontSize: 16,
-      fontWeight: '600',
+      fontSize: 15,
+      fontWeight: 'bold',
+      marginTop:-3
     },
     buttonContainer: {
       backgroundColor: 'rgba(0,0,0,0.2)',
@@ -116,6 +117,8 @@ export const styles = StyleSheet.create({
     },
     text: {
       color: 'gray',
-      fontSize: 15
+      fontSize: 14,
+      fontWeight:'bold',
+      fontFamily: 'serif'
     }
   });
