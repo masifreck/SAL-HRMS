@@ -35,25 +35,53 @@ const Punch = ({ navigation }) => {
   const {hasPermission} = useCameraPermission();
   const [In,setIn]=useState('')
   const [out,setOut]=useState('')
-
   useEffect(() => {
-    const fetchPunchStatus = async () => {
+    const getEmployeeIdAndCallAPI = async () => {
       try {
-       
-        const punchIn = JSON.parse(await AsyncStorage.getItem("punchIn"));
-        setIn(punchIn)
-        const punchOut=JSON.parse(await AsyncStorage.getItem("punchOut"));
-        setOut(punchOut)
-        console.log('punchin',punchIn) 
-        console.log('punchout',punchOut)// Assuming the punchIn is stored in AsyncStorage
+        // Retrieve EmployeeId from AsyncStorage
+        const id = await AsyncStorage.getItem('EmployeeMobileNo');
+        if (id !== null) {
+          setEmployeeId(id);
+          console.log('Employee ID:', id);
+
+          // Once EmployeeId is retrieved, call the API
+          const formData = new FormData();
+          formData.append('m', id); // Use the retrieved EmployeeId in the form data
+
+          // Call the API
+          const response = await fetch('https://sal.tranzol.com/apiv2/GetAttendance', {
+            method: 'POST',
+            body: formData,
+          });
+
+          // Try to parse the response as text since it may not be JSON
+          const result = await response.text();
+          console.log('API Response:', result);
+          // Handle the punch status based on the API result
+          if (result === 'IN') {
+            
+            setIn(false)
+            setOut(true)
+          } else if (result === 'OUT') {
+            
+            setOut(false)
+            setIn(true)
+          } else {
+            console.error('Unexpected API response:', result);
+          }
+        } else {
+          console.error('EmployeeId not found in AsyncStorage');
+        }
       } catch (error) {
-        console.error('Failed to fetch punch punchIn', error);
+        console.error('Error retrieving EmployeeId or calling the API:', error);
       }
     };
-    fetchPunchStatus(); // Initial fetch
-     
-   
+
+    // Call the function when the component mounts
+    getEmployeeIdAndCallAPI();
   }, []);
+
+ 
   Sound.setCategory('Playback'); // Ensures the sound plays even in silent mode
 
   const successSound = new Sound(successsound, Sound.MAIN_BUNDLE, (error) => {
@@ -279,11 +307,11 @@ const Punch = ({ navigation }) => {
       { name: 'lat', data: latitude.toString() },
       { name: 'lng', data: longitude.toString() },
       { name: 'm', data: EmployeeId },
-      {name :'d',0:0},
+      {name :'d',data:'0'},
       { name: 'file', filename: 'selfie.jpg', type: 'image/jpeg', data: RNFetchBlob.wrap(imageSource) },
       // Add any other necessary fields here
     ];
-  
+    console.log('sending Data',formData) 
     setPuchLoading(true);
   
     try {
@@ -329,18 +357,18 @@ const Punch = ({ navigation }) => {
     console.log('Latitude:', latitude);
     console.log('Longitude:', longitude);
     console.log('Image Source:', imageSource);
-    console.log('Employee ID:', EmployeeId);
+    console.log('Employee ID:', EmployeeId); 
   
     // Create FormData
     const formData = [
       { name: 'lat', data: latitude.toString() },
       { name: 'lng', data: longitude.toString() },
-      {name :'d',1:1},
+      {name :'d',data:'1'},
       { name: 'm', data: EmployeeId },
       { name: 'file', filename: 'selfie.jpg', type: 'image/jpeg', data: RNFetchBlob.wrap(imageSource) },
       // Add any other necessary fields here
     ];
-  
+  console.log('sending Data',formData)
     setPuchLoading(true);
   
     try {

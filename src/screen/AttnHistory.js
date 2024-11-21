@@ -18,60 +18,63 @@ function AttnHistory() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [In,setIn]=useState('')
   const [out,setOut]=useState('')
+  const [status,setStatus]=useState('')
+  const [employeeId,setEmployeeId]=useState('')
   const [punchData, setPunchData] = useState({
     '2023-06-01': { punchIn: '09:30 AM', punchOut: '05:00 PM' },
     '2023-06-02': { punchIn: '08:45 AM', punchOut: '05:15 PM' },
     // Add more punch data for other dates
   });
+
+
   useEffect(() => {
-    const fetchPunchStatus = async () => {
+    const getEmployeeIdAndCallAPI = async () => {
       try {
-       
-        const punchIn = JSON.parse(await AsyncStorage.getItem("punchIn"));
-        setIn(punchIn)
-        const punchOut=JSON.parse(await AsyncStorage.getItem("punchOut"));
-        setOut(punchOut)
-        console.log('punchin',punchIn) 
-        console.log('punchout',punchOut)// Assuming the punchIn is stored in AsyncStorage
-      } catch (error) {
-        console.error('Failed to fetch punch punchIn', error);
-      }
-    };
-    const checkPunchStatusAndExecute = async () => {
-      try {
-        // Retrieve punchIn and punchOut statuses from AsyncStorage
-        const punchInStatus = await AsyncStorage.getItem('punchIn');
-        const punchOutStatus = await AsyncStorage.getItem('punchOut');
-    
-        // Convert string values back to boolean
-        const isPunchIn = punchInStatus === 'true';
-        const isPunchOut = punchOutStatus === 'true';
-    
-        // Check if both punchIn and punchOut are true
-        if (isPunchIn && isPunchOut) {
-          await AsyncStorage.setItem("punchOut", JSON.stringify(false));
-          await AsyncStorage.setItem("punchIn", JSON.stringify(false));
-        setIn('false')
-           setOut('false')
-          
-          console.log('Both punchIn and punchOut are true. Executing logic...');
-          // Add your logic here
+        // Retrieve EmployeeId from AsyncStorage
+        const id = await AsyncStorage.getItem('EmployeeMobileNo');
+        if (id !== null) {
+          setEmployeeId(id);
+          console.log('Employee ID:', id);
+
+          // Once EmployeeId is retrieved, call the API
+          const formData = new FormData();
+          formData.append('m', id); // Use the retrieved EmployeeId in the form data
+
+          // Call the API
+          const response = await fetch('https://sal.tranzol.com/apiv2/GetAttendance', {
+            method: 'POST',
+            body: formData,
+          });
+
+          // Try to parse the response as text since it may not be JSON
+          const result = await response.text();
+          console.log('API Response:', result);
+setStatus(result)
+          // Handle the punch status based on the API result
+          if (result === 'IN') {
+           
+            setIn(true)
+            setOut(true)
+          } else if (result === 'OUT') {
+          setIn(true)
+            setOut(false)
+            
+          } else {
+            console.error('Unexpected API response:', result);
+          }
         } else {
-          console.log('Either punchIn or punchOut is not true.');
+          console.error('EmployeeId not found in AsyncStorage');
         }
       } catch (error) {
-        console.error('Failed to check punch status:', error);
+        console.error('Error retrieving EmployeeId or calling the API:', error);
       }
     };
-    
-    // Call this function to check punch status
-    checkPunchStatusAndExecute();
 
-    fetchPunchStatus(); // Initial fetch
-     
-   
+    // Call the function when the component mounts
+    getEmployeeIdAndCallAPI();
   }, []);
-  
+
+
 
 
   const getPunchInTime = (date) => {
