@@ -49,8 +49,6 @@ export const styles = StyleSheet.create({
       position: 'absolute',
       justifyContent: 'center',
       alignItems: 'center',
-      width: 200,
-      height: 200,
       borderRadius: 100,
       backgroundColor: 'rgba(255, 255, 255, 0.8)',
       bottom: -40,

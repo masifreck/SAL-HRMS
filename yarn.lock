@@ -1813,6 +1813,11 @@
   dependencies:
     invariant "^2.2.4"
 
+"@react-native-community/image-editor@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.npmjs.org/@react-native-community/image-editor/-/image-editor-4.3.0.tgz"
+  integrity sha512-JMHE+6D1hHhLwboEcbxdqk47FQ9nDrSGTlHrxDgmwUnE6wA1bQh0Ver7EyDcKxfxLqBNnHUx54mbtWVuP182vA==
+
 "@react-native-community/netinfo@^11.3.2":
   version "11.3.2"
   resolved "https://registry.npmjs.org/@react-native-community/netinfo/-/netinfo-11.3.2.tgz"
@@ -2503,7 +2508,7 @@ babel-preset-jest@^29.6.3:
 balanced-match@^1.0.0:
   version "1.0.2"
 
-base-64@0.1.0:
+base-64@^0.1.0, base-64@0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/base-64/-/base-64-0.1.0.tgz"
   integrity sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==
@@ -5118,11 +5123,6 @@ react-is@^17.0.1:
 react-native-alert-notification@^0.4.0:
   version "0.4.0"
 
-react-native-app-intro-slider@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.npmjs.org/react-native-app-intro-slider/-/react-native-app-intro-slider-4.0.4.tgz"
-  integrity sha512-Zkjaol6X3BbZkHUpVDj2LjdidpS6rCgKi0fx80xgGKa0pHxBRd4swWTv2bHnnvu5k1/HXwYk0mY2TbK+2jHl5w==
-
 react-native-calendars@^1.1306.0:
   version "1.1306.0"
   resolved "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1306.0.tgz"
@@ -5137,6 +5137,11 @@ react-native-calendars@^1.1306.0:
     xdate "^0.8.0"
   optionalDependencies:
     moment "^2.29.4"
+
+react-native-compressor@^1.10.4:
+  version "1.10.4"
+  resolved "https://registry.npmjs.org/react-native-compressor/-/react-native-compressor-1.10.4.tgz"
+  integrity sha512-58gbmJ+8IvsKP8JKK1E8XW5trfQY3dNuH7S0hYw0tSRQc6l0GZ3k8TYtoUbySOc1xcQSrUo51o0Chwe8x7mUTg==
 
 react-native-device-info@^11.1.0:
   version "11.1.0"
@@ -5156,6 +5161,14 @@ react-native-element-dropdown@^2.12.1:
   integrity sha512-Z3uWNFBoezDEsy9AZJxoDc9DxoAdfeprUjaInmbuzYOk6R0Y0UZ659JIalX20XNvrNRWJUfSZwbM94jWYNsIyw==
   dependencies:
     lodash "^4.17.21"
+
+react-native-fs@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.npmjs.org/react-native-fs/-/react-native-fs-2.20.0.tgz"
+  integrity sha512-VkTBzs7fIDUiy/XajOSNk0XazFE9l+QlMAce7lGuebZcag5CnjszB+u4BdqzwaQOdcYb5wsJIsqq4kxInIRpJQ==
+  dependencies:
+    base-64 "^0.1.0"
+    utf8 "^3.0.0"
 
 react-native-geolocation-service@^5.3.1:
   version "5.3.1"
@@ -5179,6 +5192,11 @@ react-native-gifted-charts@^1.4.29:
   dependencies:
     gifted-charts-core "^0.1.30"
 
+react-native-image-resizer@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.npmjs.org/react-native-image-resizer/-/react-native-image-resizer-1.4.5.tgz"
+  integrity sha512-33EgL3C9pyvjKpullAB6fWyD5QhoYEpNNB9rxNvUsrpAnL2mHBW7PTrUCCZudJeB6Weg7nbweKrSw1nnto5aqg==
+
 react-native-linear-gradient@^2.8.3:
   version "2.8.3"
   resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
@@ -5190,16 +5208,6 @@ react-native-maps@^1.11.3:
   integrity sha512-alz5FnQicz21lL09oTnQvX5Tw9zHoRabE3hchBnYS56KaF/6l0/cHe5ImMtcqriD9fmn6SXjW3cahELkCoR5mw==
   dependencies:
     "@types/geojson" "^7946.0.13"
-
-react-native-mmkv-storage@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.npmjs.org/react-native-mmkv-storage/-/react-native-mmkv-storage-0.9.1.tgz"
-  integrity sha512-FzSx4PKxK2ocT/OuKGlaVziWZyQYHYLUx9595i1oXY263C5mG19PN5RiBgEGL2S5lK4VGUCzO85GAcsrNPtpOg==
-
-react-native-mmkv@^2.12.2:
-  version "2.12.2"
-  resolved "https://registry.npmjs.org/react-native-mmkv/-/react-native-mmkv-2.12.2.tgz"
-  integrity sha512-6058Aq0p57chPrUutLGe9fYoiDVDNMU2PKV+lLFUJ3GhoHvUrLdsS1PDSCLr00yqzL4WJQ7TTzH+V8cpyrNcfg==
 
 react-native-modal-datetime-picker@^17.1.0:
   version "17.1.0"
@@ -5911,6 +5919,7 @@ ts-object-utils@0.0.5:
   dependencies:
     "@react-native-async-storage/async-storage" "^1.24.0"
     "@react-native-community/datetimepicker" "^8.2.0"
+    "@react-native-community/image-editor" "^4.3.0"
     "@react-native-community/netinfo" "^11.3.2"
     "@react-native-firebase/app" "^20.4.0"
     "@react-native-vector-icons/ionicons" "^7.4.0-alpha.16"
@@ -5924,18 +5933,18 @@ ts-object-utils@0.0.5:
     react "^18.2.0"
     react-native "^0.73.9"
     react-native-alert-notification "^0.4.0"
-    react-native-app-intro-slider "^4.0.4"
     react-native-calendars "^1.1306.0"
+    react-native-compressor "^1.10.4"
     react-native-device-info "^11.1.0"
     react-native-document-picker "^9.3.0"
     react-native-element-dropdown "^2.12.1"
+    react-native-fs "^2.20.0"
     react-native-geolocation-service "^5.3.1"
     react-native-gesture-handler "^2.18.1"
     react-native-gifted-charts "^1.4.29"
+    react-native-image-resizer "^1.4.5"
     react-native-linear-gradient "^2.8.3"
     react-native-maps "^1.11.3"
-    react-native-mmkv "^2.12.2"
-    react-native-mmkv-storage "^0.9.1"
     react-native-modal-datetime-picker "^17.1.0"
     react-native-month-year-picker "^1.9.0"
     react-native-permissions "^4.1.5"
@@ -6072,6 +6081,11 @@ use-latest-callback@^0.2.1:
   version "0.2.1"
   resolved "https://registry.npmjs.org/use-latest-callback/-/use-latest-callback-0.2.1.tgz"
   integrity sha512-QWlq8Is8BGWBf883QOEQP5HWYX/kMI+JTbJ5rdtvJLmXTIh9XoHIO3PQcmQl8BU44VKxow1kbQUHa6mQSMALDQ==
+
+utf8@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/utf8/-/utf8-3.0.0.tgz"
+  integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
 
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"

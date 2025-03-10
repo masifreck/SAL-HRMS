@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8d7f5',
         flexDirection: 'row',
         justifyContent: "space-between",
+        marginTop:40
        
     },
     txt: {

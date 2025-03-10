@@ -21,6 +21,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import Sound from 'react-native-sound';  
 import successsound from '../assets/mixkit.wav'
+import RNFS from 'react-native-fs';
+import ImageResizer from 'react-native-image-resizer';
 const Punch = ({ navigation }) => {
   const camera = useRef(null);
   const [showCamera, setShowCamera] = useState(false);
@@ -35,6 +37,14 @@ const Punch = ({ navigation }) => {
   const {hasPermission} = useCameraPermission();
   const [In,setIn]=useState('')
   const [out,setOut]=useState('')
+  const compressImage = async (imagePath) => {
+    const compressedPath = `${RNFS.CachesDirectoryPath}/compressed.jpg`;
+  
+    await RNFS.copyFile(imagePath, compressedPath); // Convert to JPEG
+    console.log('Compressed Image Path:', compressedPath);
+  
+    return compressedPath;
+  };
   useEffect(() => {
     const getEmployeeIdAndCallAPI = async () => {
       try {
@@ -42,7 +52,7 @@ const Punch = ({ navigation }) => {
         const id = await AsyncStorage.getItem('EmployeeMobileNo');
         if (id !== null) {
           setEmployeeId(id);
-          console.log('Employee ID:', id);
+         // console.log('Employee ID:', id);
 
           // Once EmployeeId is retrieved, call the API
           const formData = new FormData();
@@ -67,13 +77,13 @@ const Punch = ({ navigation }) => {
             setOut(false)
             setIn(true)
           } else {
-            console.error('Unexpected API response:', result);
+            //console.error('Unexpected API response:', result);
           }
         } else {
-          console.error('EmployeeId not found in AsyncStorage');
+          //console.error('EmployeeId not found in AsyncStorage');
         }
       } catch (error) {
-        console.error('Error retrieving EmployeeId or calling the API:', error);
+        //console.error('Error retrieving EmployeeId or calling the API:', error);
       }
     };
 
@@ -86,19 +96,19 @@ const Punch = ({ navigation }) => {
 
   const successSound = new Sound(successsound, Sound.MAIN_BUNDLE, (error) => {
     if (error) {
-      console.log('Failed to load the sound', error);
+      //console.log('Failed to load the sound', error);
       return;
     }
-    console.log('Sound loaded successfully');
-    console.log('Sound duration: ', successSound.getDuration());
+    // console.log('Sound loaded successfully');
+    // console.log('Sound duration: ', successSound.getDuration());
   });
   
   const playSuccessSound = () => {
     successSound.play((success) => {
       if (success) {
-        console.log('Sound played successfully');
+        //console.log('Sound played successfully');
       } else {
-        console.log('Playback failed due to audio decoding errors');
+        //console.log('Playback failed due to audio decoding errors');
         successSound.reset()  // Reset to avoid playback issues on next attempt
       }
     });
@@ -139,7 +149,7 @@ const Punch = ({ navigation }) => {
       );
 
       if (granted) {
-        console.log('Camera permission already granted');
+        //console.log('Camera permission already granted');
         return PermissionsAndroid.RESULTS.GRANTED;
       } else {
         // If permission is not granted, request it
@@ -156,16 +166,16 @@ const Punch = ({ navigation }) => {
 
         if (requestResult === PermissionsAndroid.RESULTS.GRANTED) {
           RNRestart.restart();
-          console.log('Camera permission granted');
-          console.log(
-            'restart kindly===========================================',
-          );
+          //console.log('Camera permission granted');
+          //console.log(
+            //'restart kindly===========================================',
+          //);
           console.log(
             PermissionsAndroid.RESULTS.GRANTED,
             PermissionsAndroid.PERMISSIONS.CAMERA,
           );
         } else {
-          console.log('Camera permission denied');
+          //console.log('Camera permission denied');
           // Optionally, you can show an alert to inform the user
           Alert.alert(
             'Permission Denied',
@@ -213,7 +223,7 @@ const Punch = ({ navigation }) => {
 
   if (!hasPermission) {
     // Handle permission denied case
-    console.log('Permission denied');
+    //console.log('Permission denied');
     return <NoCameraErrorView />;
   }
 
@@ -276,14 +286,97 @@ const Punch = ({ navigation }) => {
       navigation.goBack();
     }
   };
+ // 🔹 Resize Image Without Compression
+ 
 
-  const capturePhoto = async () => {
-    if (camera.current !== null) {
-      const photo = await camera.current.takePhoto({});
+ const resizeImage = async (imagePath) => {
+   try {
+     if (!imagePath) {
+       throw new Error("Image path is undefined!");
+     }
+ 
+     console.log("📂 Processing Image Path:", imagePath);
+ 
+     const resizedImage = await ImageResizer.createResizedImage(
+       imagePath,
+       1080, // New width
+       1080, // New height
+       "JPEG", // Format
+       10, // Quality (0-100)
+       0, // Rotation
+       undefined, // Output path (optional)
+       false, // Keep metadata
+     );
+ 
+     if (!resizedImage.uri) {
+       throw new Error("Failed to get resized image path!");
+     }
+ 
+     console.log("✅ Resized Image Path:", resizedImage.uri);
+     return resizedImage.uri;
+   } catch (error) {
+     console.error("🚨 Image Processing Error:", error);
+     return imagePath; // Return original image if resizing fails
+   }
+ };
+ 
+
+const capturePhoto = async () => {
+  if (camera.current !== null) {
+    try {
+      console.log("📸 Capturing photo...");
+
+      const photo = await camera.current.takePhoto({
+        qualityPrioritization: "balanced",
+        skipMetadata: true,
+      });
+
+      console.log("✅ Photo captured:", photo);
+
+      if (!photo?.path) {
+        console.error("❌ No photo path received!");
+        return;
+      }
+
       setImageSource(photo.path);
-      setShowCamera(false);
+      //console.log("🖼 Original Image Path:", photo.path);
+
+      // Resize Image
+      const resizedPath = await resizeImage(photo.path);
+
+      if (!resizedPath) {
+        console.error("❌ Resized image path is undefined!");
+        return;
+      }
+
+      // Get Final Image Size
+      const fileInfo = await RNFS.stat(resizedPath);
+      const fileSizeInKB = (fileInfo.size / 1024).toFixed(2);
+
+      console.log(`📂 Final Image Path: ${resizedPath}`);
+      console.log(`📏 Final Image Size: ${fileSizeInKB} KB`);
+
+    setShowCamera(false)
+      setImageSource(resizedPath);
+      
+    } catch (error) {
+      console.error("🚨 Capture Error:", error);
     }
-  };
+  } else {
+    console.error("🚨 Camera ref is null!");
+  }
+};
+  
+  
+
+ 
+
+
+  
+
+
+
+  
 
   //import RNFetchBlob from 'rn-fetch-blob';
 
@@ -327,7 +420,9 @@ const Punch = ({ navigation }) => {
       if (rawResponse === 'SUCCESS') {
        
         await AsyncStorage.setItem("punchIn", JSON.stringify(true));
-        
+        const currentDateTime = `Punch In: ${new Date().toISOString()}`;
+        await AsyncStorage.setItem('lastPunchIn', currentDateTime);
+  
         playSuccessSound();  
         Alert.alert('Punch Success', 'Your punch is successful.');
         navigation.replace('DrawerNavigation');
@@ -384,6 +479,8 @@ const Punch = ({ navigation }) => {
       if (rawResponse === 'SUCCESS') {
         playSuccessSound(); 
         await AsyncStorage.setItem("punchOut", JSON.stringify(true));
+        const currentDateTime = `Punch Out: ${new Date().toISOString()}`;
+        await AsyncStorage.setItem('lastPunchIn', currentDateTime);
         Alert.alert('Punch Success', 'Your punch is successful.');
         navigation.replace('DrawerNavigation');
       } else if (rawResponse === 'FAIL') {
@@ -450,7 +547,7 @@ const Punch = ({ navigation }) => {
                 source={{ uri: `file://${imageSource}` }}
               />
             ) : (
-              <Image source={require('../../src/assets/selfie(1).png')} style={{ width: 150, height: 150, marginRight: 50, marginTop: 30 }} />
+              <Image source={require('../../src/assets/selfie(1).png')} style={{ width: 200, height: 200,}} />
             )}
           </View>
         </View>

@@ -127,11 +127,11 @@ const EProfile = () => {
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Company :</Text>
-                  <Text style={styles.txt2}>Tranzol Pvt. Ltd.</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Department :</Text>
-                  <Text style={styles.txt2}>Human Resouses</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Current/Left :</Text>
@@ -152,19 +152,19 @@ const EProfile = () => {
               <View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Joining Date :</Text>
-                  <Text style={styles.txt2}>16-05-2016</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Division :</Text>
-                  <Text style={styles.txt2}>BBSR</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Designation :</Text>
-                  <Text style={styles.txt2}>Manager</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Grade :</Text>
-                  <Text style={styles.txt2}>IL5</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
 
               </View>
@@ -189,7 +189,7 @@ const EProfile = () => {
               <View >
                 <View>
                   <Text style={styles.txt1}>PF No :</Text>
-                  <Text style={styles.txt2}>OF1234567876543456</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 {/* <View style={{ marginTop: 10 }}>
                 <Text style={styles.txt1}>UAN :</Text>
@@ -197,11 +197,11 @@ const EProfile = () => {
               </View> */}
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>ESIC Date :</Text>
-                  <Text style={styles.txt2}>01-09-2016</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Profession Tax :</Text>
-                  <Text style={styles.txt2}>Yes</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
               </View>
 
@@ -216,15 +216,15 @@ const EProfile = () => {
               </View> */}
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>UAN :</Text>
-                  <Text style={styles.txt2}>199788349909</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>ESIC No :</Text>
-                  <Text style={styles.txt2}>12345678987654</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>PF Applicable :</Text>
-                  <Text style={styles.txt2}>Yes</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
               </View>
             </View>
@@ -269,18 +269,18 @@ const EProfile = () => {
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Mobile No 2 :</Text>
-                  <Text style={styles.txt2}>1997883499</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Emergency Contact Name :</Text>
-                  <Text style={styles.txt2}>Mohan Dash</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
               </View>
 
               <View>
                 <View>
                   <Text style={styles.txt1}>Mobile No 1 :</Text>
-                  <Text style={styles.txt2}>9087654321</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Personal Email :</Text>
@@ -319,26 +319,26 @@ const EProfile = () => {
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Bank Branch :</Text>
-                  <Text style={styles.txt2}>Bhadrak</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>IFSC Code :</Text>
-                  <Text style={styles.txt2}>SBIN0123456</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Account Holder Name :</Text>
-                  <Text style={styles.txt2}>Mohd Asif</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
               </View>
 
               <View>
                 <View>
                   <Text style={styles.txt1}>Bank :</Text>
-                  <Text style={styles.txt2}>SBI</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>Account No :</Text>
-                  <Text style={styles.txt2}>20078123456</Text>
+                  <Text style={styles.txt2}></Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <Text style={styles.txt1}>MICR Code :</Text>
@@ -556,7 +556,7 @@ const PanCard = () => {
       >
         <View style={{ marginTop: 50, marginLeft: 16 }}>
           <Text style={styles.txt3}>Permanent Account Number :</Text>
-          <Text style={[styles.txt4, { marginTop: 3, fontSize: 15, fontWeight: 'bold' }]}>AFGPO1234B</Text>
+          <Text style={[styles.txt4, { marginTop: 3, fontSize: 15, fontWeight: 'bold' }]}></Text>
         </View>
         <View style={{ marginTop: 6, marginLeft: 16 }}>
           <Text style={styles.txt3}>Name :</Text>
@@ -564,11 +564,11 @@ const PanCard = () => {
         </View>
         <View style={{ marginTop: 6, marginLeft: 16 }}>
           <Text style={styles.txt3}>Father's Name :</Text>
-          <Text style={styles.txt4}>{'Abc Name'.toUpperCase()}</Text>
+          <Text style={styles.txt4}></Text>
         </View>
         <View style={{ marginTop: 6, marginLeft: 16, flexDirection: 'row', alignItems: 'center' }}>
           <Text style={styles.txt3}>Date of Barth :</Text>
-          <Text style={[styles.txt4, { marginLeft: 6 }]}>21-05-2023</Text>
+          <Text style={[styles.txt4, { marginLeft: 6 }]}></Text>
         </View>
 
 
@@ -612,11 +612,11 @@ const AdharCard = () => {
         </View>
         <View style={{ marginTop: 4, marginLeft: 95, flexDirection: 'row', alignItems: 'center' }}>
           <Text style={styles.txt5}>DOB :</Text>
-          <Text style={styles.txt6}>23-05-2023</Text>
+          <Text style={styles.txt6}></Text>
         </View>
         <View style={{ marginTop: 4, marginLeft: 95, }}>
           <Text style={styles.txt5}>Address :</Text>
-          <Text style={[styles.txt6, { width: 160 }]}>Rashulgadh, Bhubaneswar, Odisha, 751010</Text>
+          <Text style={[styles.txt6, { width: 160 }]}></Text>
         </View>
         <Text style={{
           color: 'black',
@@ -625,7 +625,7 @@ const AdharCard = () => {
           left: 80,
           fontSize: 15,
           fontWeight: '700'
-        }}>9876543215678965</Text>
+        }}></Text>
       </ImageBackground>
     </View>
   )
